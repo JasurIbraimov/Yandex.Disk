@@ -1,0 +1,27 @@
+{% extends "api/base.html" %} 
+{% load static %} 
+{% block title %} Главная {% endblock title %} 
+
+
+{% block content %}
+
+<nav class="menu">
+    <div class="menu__left">
+		<a href="/" class="menu__item menu__logo">
+			<img src="{% static "images/logo.png" %}" alt="Логотип Яндекс.Диск">
+			Яндекс.Диск
+		</a>
+	</div>
+    <div class="menu__right">
+        <a href="" class="menu__item">Войти</a>
+        <a href="" class="menu__item">Регистрация</a>
+    </div>
+</nav>
+
+{% endblock content %}
+
+
+{% block scripts %}
+<script src="{% static "js/script.js" %}"></script>
+{% endblock scripts %}
+

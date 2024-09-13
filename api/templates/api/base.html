@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>
+            Mycego - Яндекс.Диск - {% block title %}{% endblock title %}
+        </title>
+		<link rel="stylesheet" href="{% static "css/style.css" %}">
+        <link rel="shortcut icon" href="{% static "images/logo.png" %}" type="image/png">
+        <script src="https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js"></script>
+    </head>
+    <body>
+        <div class="container">
+			{% block content %}{% endblock content %}
+		</div>
+
+        {% block scripts %}{% endblock scripts %}
+    </body>
+</html>
