@@ -102,6 +102,3 @@ STATICFILES_DIRS = [BASE_DIR / "api"]
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-URL='https://cloud-api.yandex.net/v1/disk/resources'
-HEADERS={'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': f'OAuth {env("TOKEN")}'}

@@ -119,5 +119,74 @@ ol {
 
 .menu__right {
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
+    color: white;
+    align-items: center;
+}
+
+.success {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    flex-direction: column;
+}
+
+.success .btn {
+    margin-block: 1rem;
+}
+
+.success h2 {
+    margin-block: 1rem;
+}
+
+.btn {
+    padding: 1rem;
+    background-color: black;
+    border-radius: 1rem;
+    color: white;
+    position: relative;
+    font-size: 1rem;
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.btn::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    border-radius: 1rem;
+    top: -100%;
+    left: 0;
+
+}
+
+.btn::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    border-radius: 1rem;
+    top: -100%;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    transition: 0.5s;
+    align-items: center;
+}
+.btn.animation-done::before {
+    top: 0%;
+}
+
+.btn:active {
+    transform: scale(1.1)
+}
+.btn.animation-done::after {
+    content: "Сделано!";
+    top: 0%;
 }

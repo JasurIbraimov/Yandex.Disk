@@ -1,0 +1,39 @@
+{% extends "api/base.html" %} 
+{% load static %} 
+{% block title %} Главная {% endblock title %} 
+
+{% block links %}
+<script src="https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-token-with-polyfills-latest.js"></script>
+{% endblock links %}
+
+{% block content %}
+<div class="success" id="success">
+   <h2>
+      Вы успешно aвторизованы в Yandex
+   </h2>
+   <h3>
+      Теперь можете скопировать публичный ключ и закрыть эту страницу
+   </h3>
+   <p>
+      <button class="btn" id="publicKey">Копировать публичный ключ</button>
+   </p>
+</div>
+{% endblock content %}
+
+
+{% block scripts %}
+<script>
+   const hash = window.location.hash;
+   const token = hash.match(/access_token=([^&]*)/)[1];
+   const publicKey = document.getElementById("publicKey")
+   publicKey.addEventListener("click", (event) => {
+      navigator.clipboard.writeText(token);
+      event.target.classList.add("animation-done");
+   })
+   
+   localStorage.setItem('yandex_oauth_token', token);
+
+   window.YaSendSuggestToken("http://127.0.0.1:8000");
+</script>
+{% endblock scripts %}
+
