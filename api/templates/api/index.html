@@ -1,9 +1,10 @@
-{% extends "api/base.html" %} 
+{% extends "api/base.html" %}
+
 {% load static %} 
 {% load custom_tags %}
 
 {% block links %}
-<script src="https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js"></script>
+	<script src="https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js"></script>
 {% endblock links %}
 
 {% block content %}
@@ -15,38 +16,58 @@
 			<span>Яндекс.Диск</span>
 		</a>
 	</div>
-   <div class="loader" id="yandexLoader">
-      {% include "components/loader.html" %}
-   </div>
+   	<div class="loader" id="yandexLoader">
+      	{% include "components/loader.html" %}
+   	</div>
     <div class="menu__right" id="yandexService">
-      <p>Получить публичный ключ:</p>
-      <p id="yandexBtn">
-      </p>
+      	<p>Получить публичный ключ:</p>
+      	<p id="yandexBtn"></p>
     </div>
 </nav>
 
 <header class="header">
-   <form class="header__form">
-      <input name="token" class="input" id="tokenInput" type="text" placeholder="Введите Ваш публичный ключ:">
-      <button class="btn">Поиск</button>
-   </form>
+   	<form class="header__form">
+      	<input name="token" class="input" id="tokenInput" type="text" placeholder="Введите Ваш публичный ключ:">
+      	<button class="btn">Поиск</button>
+   	</form>
 </header>
 
-{% if data %}
-   <main class="main">
-      <section class="main__info">
-         <h2 class="section-title">Yandex Диск: {{data.user.display_name}}</h2>
-         <p>Общее место на диске: {{data.total_space|bytes_to_gb}}</p>
-         <p>Используемое место на диске: {{data.used_space|bytes_to_gb}}}</p>
+<main class="main">
+   	{% if disk %}
+    	<section>
+			<h2 class="section-title">Yandex Диск: {{disk.user.display_name}}</h2>
+			<p>Общее место на диске: {{disk.total_space|bytes_to_gb}}</p>
+			<p>Используемое место на диске: {{disk.used_space|bytes_to_gb}}</p>
+      	</section>
+   	{% endif %}
+   	{% if items_data %}
+      	<section class="content">
+			<ul class="content__list">
+				{% for item in items_data.items %}
+					<li class="content__list-item">
+					
+						<div class="content__info">
+							<img class="content__icon" src="{% static "images/file.png" %}" alt="File icon">
+							<div>
+								<p class="content__path">{{item.path}}</p>
+								<p>{{item.name}}</p>
+							</div>
+						</div>
+						<a href="{% url "download" %}?token={{token}}&path={{item.path}}" >
+							<img class="content__icon"  src="{% static "images/download.png" %}" alt="Download icon">
+						</a>
 
-      </section>
-   </main>
-{% endif %}
+					</li>
+				{% endfor %}
+			</ul>
+      	</section>
+   	{% endif %}
+</main>
 
 {% endblock content %}
 
 
 {% block scripts %}
-<script src="{% static "js/index.js" %}"></script>
+	<script src="{% static "js/index.js" %}"></script>
 {% endblock scripts %}
 

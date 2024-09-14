@@ -239,3 +239,30 @@ ol {
 .section-title {
     margin-block: 1rem;
 }
+
+
+/* DISK CONTENT */
+.content__list-item {
+    background-color: black;
+    border: 1px solid white;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-block: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+.content__info {
+    display: flex;
+    gap: 1rem;
+}
+.content__icon {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.content__path {
+    font-size: 0.7rem;
+    opacity: 0.7;
+}

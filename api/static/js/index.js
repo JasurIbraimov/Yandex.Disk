@@ -28,5 +28,6 @@ window.addEventListener("DOMContentLoaded", () => {
 	if(token) {
 		tokenInput.value = token;
 	}
+
  
  });
