@@ -24,6 +24,7 @@
 
 :root {
     --background-color: #111;
+    --text-color: white;
 }
 
 
@@ -36,6 +37,7 @@
 
 body {
     font-family: "Raleway";
+    color: var(--text-color);
     background-color: var(--background-color);
 }
 
@@ -94,63 +96,17 @@ ol {
     padding-inline: 1rem;
 }
 
-.menu {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 0;
-    border-bottom: 1px solid white;
-}
-
-.menu__item {
-    padding: 0.5rem 1rem;
-    border-radius: 2rem;
-    color: white;
-    font-size: 1rem;
-}
-
-
-.menu__logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.menu__right {
-    display: flex;
-    gap: 1rem;
-    color: white;
-    align-items: center;
-}
-
-.success {
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    text-align: center;
-    flex-direction: column;
-}
-
-.success .btn {
-    margin-block: 1rem;
-}
-
-.success h2 {
-    margin-block: 1rem;
-}
-
+/* CUSTOM BTN */
 .btn {
     padding: 1rem;
     background-color: black;
     border-radius: 1rem;
-    color: white;
+    color: var(--text-color);
     position: relative;
     font-size: 1rem;
     overflow: hidden;
     transition: 0.5s;
+    border: 1px solid transparent;
 }
 
 .btn::before {
@@ -184,9 +140,102 @@ ol {
 }
 
 .btn:active {
-    transform: scale(1.1)
+    transform: scale(1.1);
+    border-color: var(--text-color);
 }
 .btn.animation-done::after {
     content: "Сделано!";
     top: 0%;
+}
+
+/* CUSTOM INPUT */
+.input {
+    width: 100%;
+    font-size: 1rem;
+    padding: 1rem;
+    background-color: black;
+    border-radius: 1rem;
+    color:var(--text-color);
+    border: 1px solid transparent;
+}
+
+.input:focus {
+    border-color:  white;
+}
+
+/* MENU ELEMENTS */
+.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--text-color);
+    position: relative;
+}
+
+.menu__item {
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 1rem;
+}
+
+
+.menu__logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.menu__right {
+    display: flex;
+    visibility: hidden;
+    gap: 1rem;
+    align-items: center;
+}
+.menu .loader {
+    transform: scale(0.3);
+    position: absolute;
+    right: 0px;
+}
+/* SUCCESS TOKEN PAGE */
+.success {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    flex-direction: column;
+}
+
+.success .btn {
+    margin-block: 1rem;
+}
+
+.success h2 {
+    margin-block: 1rem;
+}
+
+
+/* HEADER */
+.header {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header__form {
+    display: flex;
+    gap: 1rem;
+    flex-grow: 1;
+}
+
+.header__form button {
+    width: 10rem;
+}
+
+/* SECTIONS */
+.section-title {
+    margin-block: 1rem;
 }

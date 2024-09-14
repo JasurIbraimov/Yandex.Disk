@@ -1,6 +1,6 @@
 {% extends "api/base.html" %} 
 {% load static %} 
-{% block title %} Главная {% endblock title %} 
+{% load custom_tags %}
 
 {% block links %}
 <script src="https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js"></script>
@@ -12,55 +12,41 @@
     <div class="menu__left">
 		<a href="/" class="menu__item menu__logo">
 			<img src="{% static "images/logo.png" %}" alt="Логотип Яндекс.Диск">
-			Яндекс.Диск
+			<span>Яндекс.Диск</span>
 		</a>
 	</div>
-
-    <div class="menu__right">
+   <div class="loader" id="yandexLoader">
+      {% include "components/loader.html" %}
+   </div>
+    <div class="menu__right" id="yandexService">
       <p>Получить публичный ключ:</p>
-      <p class="menu__right" id="yandexBtn">
+      <p id="yandexBtn">
       </p>
-  
     </div>
-
 </nav>
+
+<header class="header">
+   <form class="header__form">
+      <input name="token" class="input" id="tokenInput" type="text" placeholder="Введите Ваш публичный ключ:">
+      <button class="btn">Поиск</button>
+   </form>
+</header>
+
+{% if data %}
+   <main class="main">
+      <section class="main__info">
+         <h2 class="section-title">Yandex Диск: {{data.user.display_name}}</h2>
+         <p>Общее место на диске: {{data.total_space|bytes_to_gb}}</p>
+         <p>Используемое место на диске: {{data.used_space|bytes_to_gb}}}</p>
+
+      </section>
+   </main>
+{% endif %}
 
 {% endblock content %}
 
 
 {% block scripts %}
-<script>
-window.addEventListener("DOMContentLoaded", () => {
-   window.YaAuthSuggest.init({
-         client_id: '5b92a3ed3922473db8837fe35791ad90',
-         response_type: 'token',
-         redirect_uri: 'http://127.0.0.1:8000/token'
-      },
-      'http://127.0.0.1:8000', 
-      {
-         view: 'button',
-         parentId: 'yandexBtn',
-         buttonView: 'main',
-         buttonTheme: 'light',
-         buttonSize: 'm',
-         buttonBorderRadius: 10
-      }
-   )
-   .then(function(result) {
-      return result.handler()
-   })
-   .catch(function(error) {
-      console.log('Что-то пошло не так: ', error);
-   });
-
-
-   const token = localStorage.getItem('yandex_oauth_token');
-   console.log(token);
-
-});
-
-
-
-</script>
+<script src="{% static "js/index.js" %}"></script>
 {% endblock scripts %}
 
