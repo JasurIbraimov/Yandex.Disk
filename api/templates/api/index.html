@@ -27,7 +27,7 @@
 
 <header class="header">
    	<form class="header__form">
-      	<input name="token" class="input" id="tokenInput" type="text" placeholder="Введите Ваш публичный ключ:">
+      	<input name="token" class="input" id="tokenInput" value="{% if token %}{{token}}{% endif %}" type="text" placeholder="Введите Ваш публичный ключ:">
       	<button class="btn">Поиск</button>
    	</form>
 </header>
@@ -44,8 +44,7 @@
       	<section class="content">
 			<ul class="content__list">
 				{% for item in items_data.items %}
-					<li class="content__list-item">
-					
+					<li class="content__list-item" data-path="{{item.path}}">
 						<div class="content__info">
 							<img class="content__icon" src="{% static "images/file.png" %}" alt="File icon">
 							<div>
@@ -56,10 +55,13 @@
 						<a href="{% url "download" %}?token={{token}}&path={{item.path}}" >
 							<img class="content__icon"  src="{% static "images/download.png" %}" alt="Download icon">
 						</a>
-
 					</li>
 				{% endfor %}
 			</ul>
+			<a href="{% url "download_all" %}?token={{token}}" id="downloadAll" class="btn content__btn">
+				<img class="content__icon"  src="{% static "images/download.png" %}" alt="Download icon">
+				Скачать все выбранные
+			</a>
       	</section>
    	{% endif %}
 </main>

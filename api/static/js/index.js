@@ -28,6 +28,27 @@ window.addEventListener("DOMContentLoaded", () => {
 	if(token) {
 		tokenInput.value = token;
 	}
+	const selectedItems = []
+	const downloadAllBtn = document.getElementById("downloadAll")
+	const contentList = document.querySelector(".content__list")
+	const baseURL = `${window.location.protocol}//${window.location.host}`;
+	const downloadAllUrl = new URL(baseURL + (downloadAllBtn?.getAttribute("href") || ""));
 
- 
+
+	contentList?.addEventListener("click", (event) => {
+		const target = event.target;
+		if(!target.classList.contains("content__list-item")) return;
+		const contentPath = event.target.getAttribute("data-path");
+
+		if(!target.classList.contains("selected")) {
+			event.target.classList.add("selected");
+			selectedItems.push(contentPath);
+		} else {
+			event.target.classList.remove("selected");
+			selectedItems.splice(selectedItems.indexOf(contentPath), 1);
+		}
+		downloadAllUrl.searchParams.set("pathes", selectedItems.toString())
+		downloadAllBtn.setAttribute("href", downloadAllUrl.toString());
+	})
+	
  });

@@ -107,6 +107,10 @@ ol {
     overflow: hidden;
     transition: 0.5s;
     border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
 }
 
 .btn::before {
@@ -118,7 +122,7 @@ ol {
     border-radius: 1rem;
     top: -100%;
     left: 0;
-
+    visibility: hidden;
 }
 
 .btn::after {
@@ -134,9 +138,11 @@ ol {
     justify-content: center;
     transition: 0.5s;
     align-items: center;
+    visibility: hidden;
 }
 .btn.animation-done::before {
     top: 0%;
+    visibility: visible;
 }
 
 .btn:active {
@@ -146,6 +152,7 @@ ol {
 .btn.animation-done::after {
     content: "Сделано!";
     top: 0%;
+    visibility: visible;
 }
 
 /* CUSTOM INPUT */
@@ -244,7 +251,7 @@ ol {
 /* DISK CONTENT */
 .content__list-item {
     background-color: black;
-    border: 1px solid white;
+    border: 1px solid rgba(255, 255, 255, 0.603);
     padding: 1rem;
     border-radius: 1rem;
     margin-block: 1rem;
@@ -252,6 +259,8 @@ ol {
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
+    cursor: pointer;
+    position: relative;
 }
 .content__info {
     display: flex;
@@ -265,4 +274,37 @@ ol {
 .content__path {
     font-size: 0.7rem;
     opacity: 0.7;
+}
+.content__list-item:hover::before {
+    content: "Нажмите чтобы выбрать!";
+    position: absolute;
+    background-color: gray;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    border-radius: 1rem;
+    top: -10px;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    display: block;
+}
+.content__list-item.selected:hover::before {
+    content: "Нажмите чтобы отменить выбор!"
+}
+.content__list-item.selected {
+    transform: scale(1.01);
+    border-color:  white;
+}
+
+.content__list-item.selected::after {
+    content: "Выбрано!";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+}
+
+.content__btn {
+    width: fit-content;
+    margin-block: 1rem;
 }
