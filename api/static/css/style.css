@@ -39,6 +39,7 @@ body {
     font-family: "Raleway";
     color: var(--text-color);
     background-color: var(--background-color);
+    overflow-x: hidden;
 }
 
 html {
@@ -213,14 +214,11 @@ ol {
     min-height: 100vh;
     text-align: center;
     flex-direction: column;
+    gap: 1rem;
 }
-
-.success .btn {
-    margin-block: 1rem;
-}
-
-.success h2 {
-    margin-block: 1rem;
+.success__image {
+    width: 9rem;
+    height: 9rem;
 }
 
 
@@ -295,16 +293,22 @@ ol {
     border-color:  white;
 }
 
-.content__list-item.selected::after {
-    content: "Выбрано!";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: block;
-}
-
 .content__btn {
     width: fit-content;
     margin-block: 1rem;
+}
+
+/* ERROR */
+.error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    gap: 1rem;
+}
+
+.error__image {
+    width: 10rem;
+    height: 10rem;
 }

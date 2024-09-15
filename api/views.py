@@ -1,15 +1,26 @@
 from django.shortcuts import render, redirect
-from django.http import HttpRequest, HttpResponse, HttpResponseServerError
+from django.http import HttpRequest, HttpResponse
 import requests
-from django.template import RequestContext
 from io import BytesIO
 from zipfile import ZipFile
 import logging
 
 
-def handler500(request):
-    return render(request, "api/500.html", status=500)
+def handler500(request, exception):
+    return render(request, "api/500.html", {"exception": exception}, status=500)
 
+
+def handle_exception(request: HttpRequest, e: Exception) -> HttpResponse:
+    """Обрабатывает и выводит ошибки."""
+    if isinstance(e, requests.RequestException):
+        logging.error(f"Request error: {e}")
+        return handler500(request, "Ошибка при запросе к Yandex Disk API.")
+    elif isinstance(e, ValueError):
+        logging.error(f"JSON decode error: {e}")
+        return handler500(request, "Ошибка при обработке ответа.")
+    else:
+        logging.error(f"Unexpected error: {e}")
+        return handler500(request, "Что-то пошло не так...")
 
 def home_page(request: HttpRequest) -> HttpResponse:
     try:
@@ -34,16 +45,8 @@ def home_page(request: HttpRequest) -> HttpResponse:
             context["disk"] = disk_data
             context["items_data"] = disk_items_data
         return render(request, "api/index.html", context)
-    except requests.RequestException as e:
-        logging.error(f"Request error: {e}")
-        return HttpResponseServerError("Ошибка при запросе к Yandex Disk API.")
-    except ValueError as e:
-        logging.error(f"JSON decode error: {e}")
-        return HttpResponseServerError("Ошибка при обработке ответа.")
     except Exception as e:
-        logging.error(f"Unexpected error: {e}")
-        return HttpResponseServerError("Что-то пошло не так...")
-
+        return handle_exception(request, e)
 
 def token_page(request: HttpRequest) -> HttpResponse:
     return render(request, "api/token.html", {})
@@ -61,15 +64,8 @@ def download_view(request: HttpRequest) -> HttpResponse:
         data = response.json()
 
         return redirect(data.get("href"))
-    except requests.RequestException as e:
-        logging.error(f"Request error: {e}")
-        return HttpResponseServerError("Ошибка при запросе к Yandex Disk API.")
-    except ValueError as e:
-        logging.error(f"JSON decode error: {e}")
-        return HttpResponseServerError("Ошибка при обработке ответа.")
     except Exception as e:
-        logging.error(f"Unexpected error: {e}")
-        return HttpResponseServerError("Что-то пошло не так...")
+        return handle_exception(request, e)
 
 
 def download_all_view(request: HttpRequest) -> HttpResponse:
@@ -102,12 +98,5 @@ def download_all_view(request: HttpRequest) -> HttpResponse:
         response = HttpResponse(zip_buffer, content_type='application/zip')
         response['Content-Disposition'] = 'attachment; filename=files.zip'
         return response
-    except requests.RequestException as e:
-        logging.error(f"Request error: {e}")
-        return HttpResponseServerError("Ошибка при запросе к Yandex Disk API.")
-    except ValueError as e:
-        logging.error(f"JSON decode error: {e}")
-        return HttpResponseServerError("Ошибка при обработке ответа.")
     except Exception as e:
-        logging.error(f"Unexpected error: {e}")
-        return HttpResponseServerError("Что-то пошло не так...")
+        return handle_exception(request, e)

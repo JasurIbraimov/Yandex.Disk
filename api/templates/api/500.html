@@ -2,11 +2,13 @@
 {% load static %} 
 {% block content %}
 
-<div class="success" id="success">
+<div class="error">
+    <img class="error__image" src="{% static "images/error.png" %}" alt="Error image">
     <h2>Упс, произошла ошибка!</h2>
     {% if exception %}
     <pre>{{ exception }}</pre>
     {% endif %}
+    <a class="btn" href="/">Вернуться на главное</a>
 </div>
 
 {% endblock content %}

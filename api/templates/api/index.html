@@ -60,7 +60,7 @@
 			</ul>
 			<a href="{% url "download_all" %}?token={{token}}" id="downloadAll" class="btn content__btn">
 				<img class="content__icon"  src="{% static "images/download.png" %}" alt="Download icon">
-				Скачать все выбранные
+				<span id="downloadAllText">Скачать все выбранные</span>
 			</a>
       	</section>
    	{% endif %}
