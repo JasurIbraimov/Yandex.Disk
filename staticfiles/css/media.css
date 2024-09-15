@@ -1,0 +1,18 @@
+@media(max-width: 640px) {
+	html {
+		font-size: 14px;
+	}
+	.menu__logo span{
+		display: none;
+	}
+	.menu__right {
+		flex-direction: column;
+	}
+	.header__form {
+		flex-direction: column;
+	}
+	.header {
+		min-height: 45vh;
+	}
+}
+

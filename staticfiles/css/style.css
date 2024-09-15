@@ -1,0 +1,314 @@
+@font-face {
+    font-family: "Raleway";
+    font-weight: 300;
+    src: url("/static/fonts/Raleway-Light.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Raleway";
+    font-weight: 400;
+    src: url("/static/fonts/Raleway-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Raleway";
+    font-weight: 700;
+    src: url("/static/fonts/Raleway-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Raleway";
+    font-weight: 900;
+    src: url("/static/fonts/Raleway-Black.ttf") format("truetype");
+}
+
+:root {
+    --background-color: #111;
+    --text-color: white;
+}
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Raleway";
+    color: var(--text-color);
+    background-color: var(--background-color);
+    overflow-x: hidden;
+}
+
+html {
+    font-size: 16px;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 900;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+p {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+button,
+input,
+textarea {
+    border: none;
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+.container {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding-inline: 1rem;
+}
+
+/* CUSTOM BTN */
+.btn {
+    padding: 1rem;
+    background-color: black;
+    border-radius: 1rem;
+    color: var(--text-color);
+    position: relative;
+    font-size: 1rem;
+    overflow: hidden;
+    transition: 0.5s;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.btn::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    border-radius: 1rem;
+    top: -100%;
+    left: 0;
+    visibility: hidden;
+}
+
+.btn::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    border-radius: 1rem;
+    top: -100%;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    transition: 0.5s;
+    align-items: center;
+    visibility: hidden;
+}
+.btn.animation-done::before {
+    top: 0%;
+    visibility: visible;
+}
+
+.btn:active {
+    transform: scale(1.1);
+    border-color: var(--text-color);
+}
+.btn.animation-done::after {
+    content: "Сделано!";
+    top: 0%;
+    visibility: visible;
+}
+
+/* CUSTOM INPUT */
+.input {
+    width: 100%;
+    font-size: 1rem;
+    padding: 1rem;
+    background-color: black;
+    border-radius: 1rem;
+    color:var(--text-color);
+    border: 1px solid transparent;
+}
+
+.input:focus {
+    border-color:  white;
+}
+
+/* MENU ELEMENTS */
+.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--text-color);
+    position: relative;
+}
+
+.menu__item {
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 1rem;
+}
+
+
+.menu__logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.menu__right {
+    display: flex;
+    visibility: hidden;
+    gap: 1rem;
+    align-items: center;
+}
+.menu .loader {
+    transform: scale(0.3);
+    position: absolute;
+    right: 0px;
+}
+/* SUCCESS TOKEN PAGE */
+.success {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+.success__image {
+    width: 9rem;
+    height: 9rem;
+}
+
+
+/* HEADER */
+.header {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header__form {
+    display: flex;
+    gap: 1rem;
+    flex-grow: 1;
+}
+
+.header__form button {
+    width: 10rem;
+}
+
+/* SECTIONS */
+.section-title {
+    margin-block: 1rem;
+}
+
+
+/* DISK CONTENT */
+.content__list-item {
+    background-color: black;
+    border: 1px solid rgba(255, 255, 255, 0.603);
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-block: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    cursor: pointer;
+    position: relative;
+}
+.content__info {
+    display: flex;
+    gap: 1rem;
+}
+.content__icon {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.content__path {
+    font-size: 0.7rem;
+    opacity: 0.7;
+}
+.content__list-item:hover::before {
+    content: "Нажмите чтобы выбрать!";
+    position: absolute;
+    background-color: gray;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    border-radius: 1rem;
+    top: -10px;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    display: block;
+}
+.content__list-item.selected:hover::before {
+    content: "Нажмите чтобы отменить выбор!"
+}
+.content__list-item.selected {
+    transform: scale(1.01);
+    border-color:  white;
+}
+
+.content__btn {
+    width: fit-content;
+    margin-block: 1rem;
+}
+
+/* ERROR */
+.error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    gap: 1rem;
+}
+
+.error__image {
+    width: 10rem;
+    height: 10rem;
+}
