@@ -35,7 +35,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const selectedItems = [];
     const downloadAllBtn = document.getElementById("downloadAll");
     const downloadAllBtnTextElement =
-        downloadAllBtn.querySelector("#downloadAllText");
+        downloadAllBtn?.querySelector("#downloadAllText");
     const contentListItems = document.querySelectorAll(".content__list-item");
     const baseURL = `${window.location.protocol}//${window.location.host}`;
     const downloadAllUrl = new URL(
