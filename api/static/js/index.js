@@ -60,7 +60,7 @@ window.addEventListener("DOMContentLoaded", () => {
             if (selectedItems.length == 0) {
                 downloadAllTextContent = "Скачать все выбранные";
             }
-            downloadAllBtnTextElement.textContent = downloadAllTextContent;
+            downloadAllBtnTextElement?.textContent = downloadAllTextContent;
         });
     });
 });
