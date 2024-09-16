@@ -3,13 +3,15 @@ window.addEventListener("DOMContentLoaded", () => {
     const tokenInput = document.getElementById("tokenInput");
     const yandexServiceLoader = document.getElementById("yandexLoader");
     yandexServiceLoader.style.visibility = "visible";
+    const baseURL = `${window.location.protocol}//${window.location.host}`;
+
     window.YaAuthSuggest.init(
         {
             client_id: "5b92a3ed3922473db8837fe35791ad90",
             response_type: "token",
-            redirect_uri: "http://127.0.0.1:8000/token",
+            redirect_uri: baseURL + "/token",
         },
-        "http://127.0.0.1:8000",
+        baseURL,
         {
             view: "button",
             parentId: "yandexBtn",
@@ -37,7 +39,6 @@ window.addEventListener("DOMContentLoaded", () => {
     const downloadAllBtnTextElement =
         downloadAllBtn?.querySelector("#downloadAllText");
     const contentListItems = document.querySelectorAll(".content__list-item");
-    const baseURL = `${window.location.protocol}//${window.location.host}`;
     const downloadAllUrl = new URL(
         baseURL + (downloadAllBtn?.getAttribute("href") || "")
     );
